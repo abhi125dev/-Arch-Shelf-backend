@@ -10,6 +10,7 @@ const feedRoutes = require("./Feed.route");
 const categoryRoutes = require("./Category.route");
 const testimonialRoutes = require("./Testimonial.route");
 const DashboardFeedsRoutes = require("./DashboardFeed.route");
+const competitionsRoutes = require("./Competition.route");
 const validateAccessToken = require("../../middlewares/jwt_validation");
 
 router.use("/auth", authRoutes);
@@ -21,6 +22,7 @@ router.use("/feeds", feedRoutes);
 router.use("/category", categoryRoutes);
 router.use("/testimonials", validateAccessToken, testimonialRoutes);
 router.use("/dashboardFeeds", DashboardFeedsRoutes);
+router.use("/competitions", competitionsRoutes);
 
 // test route
 router.get("/test", (req, res, next) => {

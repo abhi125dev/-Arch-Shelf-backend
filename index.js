@@ -15,7 +15,7 @@ const user = require("./routes/api/Auth.route");
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 var corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", 'http://localhost:3001'],
   credentials: true,
   optionsSuccessStatus: 200,
 };

@@ -48,14 +48,17 @@ const feedValidation = Joi.object({
       "projects",
       "courses",
       "initiatives",
-      "competitions",
       "breakfasts"
-    )
-    .required(),
+    ),
   body: Joi.string().required(),
   shortDescription: Joi.string(),
   category: Joi.string(),
   url: Joi.string(),
+  startDay: Joi.date(),
+  submissionDate: Joi.date(),
+  organizer: Joi.string(),
+  price: Joi.number(),
+  status: Joi.string(),
 });
 
 const testimonialValidation = Joi.object({

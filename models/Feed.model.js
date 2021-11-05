@@ -20,7 +20,7 @@ const feedSchema = new Schema(
         "resources",
         "projects",
         "courses",
-        "initiatives",
+        // "initiatives",
         "competitions",
         "breakfasts",
       ],
