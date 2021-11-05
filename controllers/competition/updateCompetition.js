@@ -2,10 +2,10 @@ const createError = require("http-errors");
 const formidable = require("formidable");
 
 //importing the model
-const Feed = require("../../models/Feed.model");
+const Competition = require("../../models/Competitions.model");
 const uploadFiles = require("../../services/upload-files");
 
-const updateFeed = async (req, res, next) => {
+const updateCompetition = async (req, res, next) => {
   try {
     const { id: id } = req.params;
     const form = new formidable.IncomingForm();
@@ -40,15 +40,20 @@ const updateFeed = async (req, res, next) => {
       let updateQuery = {
         title: fields.title,
         body: fields.body,
-        type: fields.type,
-        shortDescription: fields.shortDescription,
-        category: fields.category,
-        url: fields.url,
+        startDay: fields.startDay,
+        submissionDate: fields.submissionDate,
+        organizer: fields.organizer,
+        price: fields.price,
+        status: fields.status,
       };
       if (allFileUploadedArray[0]) updateQuery.media = allFileUploadedArray[0];
-      const response = await Feed.findOneAndUpdate({ _id: id }, updateQuery, {
-        new: true,
-      });
+      const response = await Competition.findOneAndUpdate(
+        { _id: id },
+        updateQuery,
+        {
+          new: true,
+        }
+      );
       res.status(200).json({
         message: "success",
         data: response,
@@ -60,4 +65,4 @@ const updateFeed = async (req, res, next) => {
   }
 };
 
-module.exports = updateFeed;
+module.exports = updateCompetition;
