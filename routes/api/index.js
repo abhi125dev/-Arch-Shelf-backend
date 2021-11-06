@@ -11,6 +11,7 @@ const categoryRoutes = require("./Category.route");
 const testimonialRoutes = require("./Testimonial.route");
 const DashboardFeedsRoutes = require("./DashboardFeed.route");
 const competitionsRoutes = require("./Competition.route");
+const questionsRoutes = require("./Question.route");
 const validateAccessToken = require("../../middlewares/jwt_validation");
 
 router.use("/auth", authRoutes);
@@ -23,6 +24,7 @@ router.use("/category", categoryRoutes);
 router.use("/testimonials", validateAccessToken, testimonialRoutes);
 router.use("/dashboardFeeds", DashboardFeedsRoutes);
 router.use("/competitions", competitionsRoutes);
+router.use("/question", questionsRoutes);
 
 // test route
 router.get("/test", (req, res, next) => {
