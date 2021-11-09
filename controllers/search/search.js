@@ -8,7 +8,7 @@ const Competition = require("../../models/Competitions.model");
 
 function clean(obj) {
   for (var propName in obj) {
-    if (obj[propName] === null || obj[propName] === undefined) {
+    if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
       delete obj[propName];
     }
   }
@@ -16,8 +16,9 @@ function clean(obj) {
 }
 const Search = async (req, res, next) => {
   const { query } = req;
-  // console.log(!(Object.keys(query).length === 0 && query.constructor === Object));
-  if (!(Object.keys(query).length === 0 && query.constructor === Object)) {
+  let tempVar=clean(query);
+  console.log(tempVar, (Object.keys(tempVar).length));
+  if (!(Object.keys(tempVar).length === 0)) {
     try {
       const startIndex = (query.start && parseInt(query.start)) || 0;
       const viewSize = (query.limit && parseInt(query.limit)) || 10;
