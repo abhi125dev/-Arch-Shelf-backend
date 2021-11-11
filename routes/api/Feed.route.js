@@ -10,6 +10,10 @@ const addComment = require("../../controllers/comment/addComment");
 const getComments = require("../../controllers/comment/getComments");
 const deleteComment = require("../../controllers/comment/deleteComment");
 const deleteFeedImage = require("../../controllers/feed/deleteFeedImage");
+const validateAccessToken = require("../../middlewares/jwt_validation");
+
+// create a new feed
+router.post("/", validateAccessToken, createFeed);
 
 // Get all feeds
 router.get("/", getFeeds);
@@ -18,13 +22,10 @@ router.get("/", getFeeds);
 router.get("/:id", getFeed);
 
 // update feed
-router.put("/:id", updateFeed);
+router.put("/:id", validateAccessToken, updateFeed);
 
 // delete a feed
-router.delete("/:id", deleteFeed);
-
-// create a new feed
-router.post("/", createFeed);
+router.delete("/:id", validateAccessToken, deleteFeed);
 
 // create a new comment for feed
 router.post("/:id/comment", addComment);
@@ -33,8 +34,8 @@ router.post("/:id/comment", addComment);
 router.get("/:id/comment", getComments);
 
 //get comment for feed
-router.delete("/:id/comment", deleteComment);
+router.delete("/:id/comment", validateAccessToken, deleteComment);
 
-router.put("/image/:id", deleteFeedImage);
+router.put("/image/:id", validateAccessToken, deleteFeedImage);
 
 module.exports = router;

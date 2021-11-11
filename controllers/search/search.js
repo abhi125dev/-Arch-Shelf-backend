@@ -158,10 +158,12 @@ const Search = async (req, res, next) => {
       // console.log(feedList, "FEED", competitionList, "COMP");
       return res.status(200).json({
         message: "success",
-        data: { resultList: feedList.concat(competitionList), count: count + count2 },
+        data: {
+          resultList: feedList.concat(competitionList),
+          count: count + count2,
+        },
       });
     } catch (error) {
-      console.log("error: ", error);
       next(error);
     }
   } else {

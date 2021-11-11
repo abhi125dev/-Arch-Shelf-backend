@@ -9,6 +9,7 @@ const Feed = require("../../models/Feed.model");
 const { feedValidation } = require("../../services/validation_schema");
 
 const createFeed = async (req, res, next) => {
+  console.log(`req.user.data`, req.user);
   try {
     const { _id: userId } = req.user.data;
     const form = new formidable.IncomingForm();
