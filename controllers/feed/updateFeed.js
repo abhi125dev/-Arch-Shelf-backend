@@ -30,9 +30,11 @@ const updateFeed = async (req, res, next) => {
           return {
             url: data.Location,
             type: fileType,
+            name: originalFileName,
           };
         })
       );
+      console.log(`allFileUploadedArray`, allFileUploadedArray);
       if (!allFileUploadedArray)
         throw createError.InternalServerError(
           "Your request could not be processed. Please contact support or try again after some time."
@@ -45,7 +47,8 @@ const updateFeed = async (req, res, next) => {
         category: fields.category,
         url: fields.url,
       };
-      if (allFileUploadedArray[0]) updateQuery.media = allFileUploadedArray[0];
+      if (allFileUploadedArray.length > 0)
+        updateQuery.media = allFileUploadedArray;
       const response = await Feed.findOneAndUpdate({ _id: id }, updateQuery, {
         new: true,
       });

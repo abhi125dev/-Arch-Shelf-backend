@@ -6,7 +6,11 @@ const convertParams = require("../../helpers/convertParams");
 const deleteFeedImage = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const data = await Feed.findOneAndUpdate({ _id: id }, { media: null });
+    const data = await Feed.findOneAndUpdate(
+      { _id: id },
+      { $pull: { media: { url: req.body.url } } },
+      { new: true }
+    );
     res.status(200).json({
       success: true,
       data: data,
