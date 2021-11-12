@@ -3,10 +3,13 @@ const { Schema, model } = require("mongoose");
 const feedSchema = new Schema(
   {
     title: { type: String, required: true },
-    media: {
-      url: { type: String },
-      type: { type: String },
-    },
+    media: [
+      {
+        url: { type: String },
+        type: { type: String },
+        name: { type: String },
+      },
+    ],
     shortDescription: { type: String },
     url: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },

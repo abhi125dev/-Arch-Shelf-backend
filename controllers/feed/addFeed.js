@@ -9,7 +9,6 @@ const Feed = require("../../models/Feed.model");
 const { feedValidation } = require("../../services/validation_schema");
 
 const createFeed = async (req, res, next) => {
-  console.log(`req.user.data`, req.user);
   try {
     const { _id: userId } = req.user.data;
     const form = new formidable.IncomingForm();
@@ -39,12 +38,13 @@ const createFeed = async (req, res, next) => {
             return {
               url: data.Location,
               type: fileType,
+              name: originalFileName,
             };
           })
         );
         const feed = new Feed({
           title,
-          media: allFileUploadedArray[0],
+          media: allFileUploadedArray,
           user: userId,
           body,
           type,
