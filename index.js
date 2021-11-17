@@ -15,7 +15,12 @@ const user = require("./routes/api/Auth.route");
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 var corsOptions = {
-  origin: ["http://localhost:3000", 'http://localhost:3001'],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://app.archshelf.com",
+    "https://archshelf.com",
+  ],
   credentials: true,
   optionsSuccessStatus: 200,
 };
