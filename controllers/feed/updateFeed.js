@@ -34,7 +34,6 @@ const updateFeed = async (req, res, next) => {
           };
         })
       );
-      console.log(`allFileUploadedArray`, allFileUploadedArray);
       if (!allFileUploadedArray)
         throw createError.InternalServerError(
           "Your request could not be processed. Please contact support or try again after some time."
@@ -47,8 +46,9 @@ const updateFeed = async (req, res, next) => {
         category: fields.category,
         url: fields.url,
       };
+      const existingFeed = await Feed.findOne({ _id: id });
       if (allFileUploadedArray.length > 0)
-        updateQuery.media = allFileUploadedArray;
+        updateQuery.media = [...existingFeed.media, ...allFileUploadedArray];
       const response = await Feed.findOneAndUpdate({ _id: id }, updateQuery, {
         new: true,
       });
