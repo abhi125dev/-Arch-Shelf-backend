@@ -21,7 +21,7 @@ var corsOptions = {
     "https://app.archshelf.com",
     "https://archshelf.com",
     "https://arch-shelf-frontend.vercel.app",
-    "https://arch-shelf.web.app",
+    "https://arch-shelf-front.web.app",
   ],
   credentials: true,
   optionsSuccessStatus: 200,
