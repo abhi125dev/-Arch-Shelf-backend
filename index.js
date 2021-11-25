@@ -20,6 +20,7 @@ var corsOptions = {
     "http://localhost:3001",
     "https://app.archshelf.com",
     "https://archshelf.com",
+    "https://www.archshelf.com",
     "https://arch-shelf-frontend.vercel.app",
     "https://arch-shelf-front.web.app",
   ],
