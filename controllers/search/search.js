@@ -5,6 +5,7 @@ const { ObjectId } = require("mongoose").Types;
 //importing the model
 const Feed = require("../../models/Feed.model");
 const Competition = require("../../models/Competitions.model");
+const Project = require("../../models/Project.model");
 
 function clean(obj) {
   for (var propName in obj) {
@@ -152,15 +153,72 @@ const Search = async (req, res, next) => {
         },
         { $sort: { created_at: -1 } },
       ]);
+      const projectList = await Project.aggregate([
+        { $match: filters },
+        {
+          $lookup: {
+            from: "category",
+            localField: "category",
+            foreignField: "_id",
+            as: "category",
+          },
+        },
+        {
+          $unwind: {
+            path: "$category",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $lookup: {
+            from: "user",
+            localField: "user",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $unwind: {
+            path: "$user",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            title: 1,
+            media: 1,
+            shortDescription: 1,
+            url: 1,
+            user: 1,
+            category: 1,
+            body: 1,
+            type: 1,
+            created_at: 1,
+            updated_at: 1,
+            category: {
+              _id: 1,
+              name: 1,
+            },
+            user: {
+              _id: 1,
+              name: 1,
+              user_handle: 1,
+              avatar_url: 1,
+            },
+          },
+        },
+        { $sort: { created_at: -1 } },
+      ]);
       // console.log(feedList,'FEED',competitionList,'COMP')
       const count = await Feed.countDocuments(filters);
       const count2 = await Competition.countDocuments(filters);
+      const count3 = await Project.countDocuments(filters);
       // console.log(feedList, "FEED", competitionList, "COMP");
       return res.status(200).json({
         message: "success",
         data: {
-          resultList: feedList.concat(competitionList),
-          count: count + count2,
+          resultList: feedList.concat(competitionList.concat(projectList)),
+          count: count + count2 + count3,
         },
       });
     } catch (error) {

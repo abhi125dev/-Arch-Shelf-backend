@@ -12,7 +12,8 @@ const testimonialRoutes = require("./Testimonial.route");
 const DashboardFeedsRoutes = require("./DashboardFeed.route");
 const competitionsRoutes = require("./Competition.route");
 const questionsRoutes = require("./Question.route");
-const searchRoutes = require("./Search.route")
+const searchRoutes = require("./Search.route");
+const projectRoutes = require("./Project.route");
 const validateAccessToken = require("../../middlewares/jwt_validation");
 
 router.use("/auth", authRoutes);
@@ -21,6 +22,7 @@ router.use("/me", validateAccessToken, meRoutes);
 router.use("/stripe", validateAccessToken, stripeRoutes);
 router.use("/user", userRoutes);
 router.use("/feeds", feedRoutes);
+router.use("/projects", projectRoutes);
 router.use("/category", categoryRoutes);
 router.use("/testimonials", validateAccessToken, testimonialRoutes);
 router.use("/dashboardFeeds", DashboardFeedsRoutes);

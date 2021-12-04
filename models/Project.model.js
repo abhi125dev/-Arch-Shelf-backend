@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 // create a schema
-const feedSchema = new Schema(
+const projectSchema = new Schema(
   {
     title: { type: String, required: true },
     media: [
@@ -11,11 +11,18 @@ const feedSchema = new Schema(
       },
     ],
     shortDescription: { type: String },
-    url: { type: String },
+    architects: { type: String },
+    manufacturers: { type: String },
+    country: { type: String },
+    area: { type: String },
+    clients: { type: String },
+    leadArchitects: { type: String },
+    photographs: { type: String },
+    // url: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     body: { type: String, required: true },
-    characteristics: { type: String },
+    year: { type: Number },
     type: {
       type: String,
       required: true,
@@ -25,11 +32,10 @@ const feedSchema = new Schema(
         "products",
         "projects",
         "courses",
-        // "initiatives",
         "competitions",
         "breakfasts",
       ],
-      default: "resources",
+      default: "projects",
     },
   },
   {
@@ -38,7 +44,7 @@ const feedSchema = new Schema(
 );
 // the schema is useless so far
 // we need to create a model using it
-const Feed = model("Feed", feedSchema, "feed");
+const Project = model("Project", projectSchema, "project");
 
 // make this available to our users in our Node applications
-module.exports = Feed;
+module.exports = Project;

@@ -10,6 +10,7 @@ const categorySchema = new Schema(
       required: false,
       enum: [
         "resources",
+        "products",
         "projects",
         "courses",
         "initiatives",
