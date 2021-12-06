@@ -68,6 +68,7 @@ const getFeed = async (req, res, next) => {
           leadArchitects: 1,
           photographs: 1,
           year: 1,
+          materials: 1,
           body: 1,
           type: 1,
           created_at: 1,

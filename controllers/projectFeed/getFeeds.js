@@ -10,25 +10,62 @@ const getFeeds = async (req, res, next) => {
   try {
     const startIndex = (query.start && parseInt(query.start)) || 0;
     const viewSize = (query.limit && parseInt(query.limit)) || 10;
-    let filters;
+    let filters = [{}];
     if (query.selected) {
-      filters = {
-        type: req.query.type,
+      filters.push({
         category: ObjectId(query.selected),
-      };
-    } else {
-      filters = {
-        type: req.query.type,
-      };
+      });
     }
-    if (query.keywordState) {
-      filters.title = {
-        $regex: `${query.keywordState}`,
-        $options: "i",
-      };
+    if (query.country) {
+      filters.push({
+        country: query.country,
+      });
     }
+    if (query.architect) {
+      filters.push({
+        architects: query.architect,
+      });
+    }
+    if (query.manufacturer) {
+      filters.push({
+        manufacturers: query.manufacturer,
+      });
+    }
+    if (query.material) {
+      filters.push({
+        materials: query.material,
+      });
+    }
+    if (query.years) {
+      filters.push({
+        year: parseInt(query.years),
+      });
+    }
+    if (query.minArea) {
+      filters.push({
+        area: { $gte: parseInt(query.minArea) },
+      });
+    }
+    if (query.maxArea) {
+      filters.push({
+        area: { $lte: parseInt(query.maxArea) },
+      });
+    }
+    // if (query.keywordState) {
+    //   filters = {
+    //     ...filters,
+    //     title: {
+    //     $regex: `${query.keywordState}`,
+    //     $options: "i",
+    //     }
+    //   };
+    // }
     const feedList = await Project.aggregate([
-      { $match: filters },
+      {
+        $match: {
+          $and: [...filters],
+        },
+      },
       {
         $lookup: {
           from: "category",
@@ -66,7 +103,6 @@ const getFeeds = async (req, res, next) => {
           user: 1,
           category: 1,
           body: 1,
-          type: 1,
           created_at: 1,
           updated_at: 1,
           category: {

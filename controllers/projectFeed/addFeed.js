@@ -7,6 +7,7 @@ const uploadFiles = require("../../services/upload-files");
 const Project = require("../../models/Project.model");
 
 const { feedValidation } = require("../../services/validation_schema");
+const { convertStringToArray } = require("../../utils");
 
 const createFeed = async (req, res, next) => {
   try {
@@ -34,6 +35,7 @@ const createFeed = async (req, res, next) => {
           leadArchitects,
           photographs,
           year,
+          materials,
         } = result;
 
         // upload files to s3
@@ -66,13 +68,14 @@ const createFeed = async (req, res, next) => {
           shortDescription,
           category,
           url,
-          architects,
-          manufacturers,
+          architects: convertStringToArray(architects),
+          manufacturers: convertStringToArray(manufacturers),
           country,
           area,
-          clients,
-          leadArchitects,
-          photographs,
+          clients: convertStringToArray(clients),
+          leadArchitects: convertStringToArray(leadArchitects),
+          photographs: convertStringToArray(photographs),
+          materials: convertStringToArray(materials),
           year,
         });
         // Save post to DB

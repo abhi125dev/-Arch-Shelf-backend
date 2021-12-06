@@ -5,6 +5,7 @@ const formidable = require("formidable");
 const Project = require("../../models/Project.model");
 const Feed = require("../../models/Feed.model");
 const uploadFiles = require("../../services/upload-files");
+const { convertStringToArray } = require("../../utils");
 
 const updateFeed = async (req, res, next) => {
   try {
@@ -46,13 +47,14 @@ const updateFeed = async (req, res, next) => {
         shortDescription: fields.shortDescription,
         category: fields.category,
         url: fields.url,
-        architects: fields.architects,
-        manufacturers: fields.manufacturers,
+        architects: convertStringToArray(fields.architects),
+        manufacturers: convertStringToArray(fields.manufacturers),
         country: fields.country,
         area: fields.area,
-        clients: fields.clients,
-        leadArchitects: fields.leadArchitects,
-        photographs: fields.photographs,
+        clients: convertStringToArray(fields.clients),
+        leadArchitects: convertStringToArray(fields.leadArchitects),
+        photographs: convertStringToArray(fields.photographs),
+        materials: convertStringToArray(fields.materials),
         year: fields.year,
       };
       const existingFeed = await Project.findOne({ _id: id });
