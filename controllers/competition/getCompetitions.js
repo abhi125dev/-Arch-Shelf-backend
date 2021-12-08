@@ -32,7 +32,6 @@ const getCompetitions = async (req, res, next) => {
           $lte: new Date(query.date),
         },
       };
-      console.log("filters: ", filters);
     }
     const competitionsList = await Competition.aggregate([
       { $match: filters },

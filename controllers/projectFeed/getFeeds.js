@@ -51,15 +51,14 @@ const getFeeds = async (req, res, next) => {
         area: { $lte: parseInt(query.maxArea) },
       });
     }
-    // if (query.keywordState) {
-    //   filters = {
-    //     ...filters,
-    //     title: {
-    //     $regex: `${query.keywordState}`,
-    //     $options: "i",
-    //     }
-    //   };
-    // }
+    if (query.keywordState) {
+      filters.push({
+        title: {
+          $regex: `${query.keywordState}`,
+          $options: "i",
+        },
+      });
+    }
     const feedList = await Project.aggregate([
       {
         $match: {
