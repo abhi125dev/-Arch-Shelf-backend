@@ -47,16 +47,36 @@ const updateFeed = async (req, res, next) => {
         shortDescription: fields.shortDescription,
         category: fields.category,
         url: fields.url,
-        architects: convertStringToArray(fields.architects),
-        manufacturers: convertStringToArray(fields.manufacturers),
+        architects: "",
+        manufacturers: "",
         country: fields.country,
         area: fields.area,
-        clients: convertStringToArray(fields.clients),
-        leadArchitects: convertStringToArray(fields.leadArchitects),
-        photographs: convertStringToArray(fields.photographs),
-        materials: convertStringToArray(fields.materials),
+        clients: "",
+        leadArchitects: "",
+        photographs: "",
+        materials: "",
         year: fields.year,
       };
+      if (fields.manufacturers) {
+        updateQuery.manufacturers = convertStringToArray(fields.manufacturers);
+      }
+      if (fields.architects) {
+        updateQuery.architects = convertStringToArray(fields.architects);
+      }
+      if (fields.clients) {
+        updateQuery.clients = convertStringToArray(fields.clients);
+      }
+      if (fields.leadArchitects) {
+        updateQuery.leadArchitects = convertStringToArray(
+          fields.leadArchitects
+        );
+      }
+      if (fields.photographs) {
+        updateQuery.photographs = convertStringToArray(fields.photographs);
+      }
+      if (fields.materials) {
+        updateQuery.materials = convertStringToArray(fields.materials);
+      }
       const existingFeed = await Project.findOne({ _id: id });
       if (allFileUploadedArray.length > 0)
         updateQuery.media = [...existingFeed.media, ...allFileUploadedArray];

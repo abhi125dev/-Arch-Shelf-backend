@@ -59,7 +59,7 @@ const createFeed = async (req, res, next) => {
             };
           })
         );
-        const feed = new Project({
+        let feeds = {
           title,
           media: allFileUploadedArray,
           user: userId,
@@ -68,16 +68,29 @@ const createFeed = async (req, res, next) => {
           shortDescription,
           category,
           url,
-          architects: convertStringToArray(architects),
-          manufacturers: convertStringToArray(manufacturers),
           country,
           area,
-          clients: convertStringToArray(clients),
-          leadArchitects: convertStringToArray(leadArchitects),
-          photographs: convertStringToArray(photographs),
-          materials: convertStringToArray(materials),
           year,
-        });
+        };
+        if (architects) {
+          feeds.architects = convertStringToArray(architects);
+        }
+        if (manufacturers) {
+          feeds.manufacturers = convertStringToArray(manufacturers);
+        }
+        if (clients) {
+          feeds.clients = convertStringToArray(clients);
+        }
+        if (leadArchitects) {
+          feeds.leadArchitects = convertStringToArray(leadArchitects);
+        }
+        if (photographs) {
+          feeds.photographs = convertStringToArray(photographs);
+        }
+        if (materials) {
+          feeds.materials = convertStringToArray(materials);
+        }
+        const feed = new Project(feeds);
         // Save post to DB
         const createdFeed = await feed.save();
         if (!createdFeed)
