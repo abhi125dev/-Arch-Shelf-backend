@@ -19,6 +19,7 @@ const addDashboardFeed = async (req, res, next) => {
 
     const addDashboardFeeds = new DashboardFeed({
       feed: req.body.feed,
+      type: req.body.feedType,
       addedBy: userId,
     });
     // Save post to DB
