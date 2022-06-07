@@ -26,6 +26,13 @@ const getCompetitions = async (req, res, next) => {
         $options: "i",
       };
     }
+    if (query.date) {
+      filters = {
+        startDay: {
+          $lte: new Date(query.date),
+        },
+      };
+    }
     const competitionsList = await Competition.aggregate([
       { $match: filters },
       {
@@ -49,10 +56,10 @@ const getCompetitions = async (req, res, next) => {
           url: 1,
           user: 1,
           body: 1,
-          startDay: 1, 
-          submissionDate: 1, 
-          organizer: 1, 
-          price: 1, 
+          startDay: 1,
+          submissionDate: 1,
+          organizer: 1,
+          price: 1,
           status: 1,
           created_at: 1,
           updated_at: 1,

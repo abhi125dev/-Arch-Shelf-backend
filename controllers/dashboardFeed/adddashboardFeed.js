@@ -7,7 +7,7 @@ const addDashboardFeed = async (req, res, next) => {
   const { _id: userId } = req.user.data;
   try {
     const count = await DashboardFeed.countDocuments();
-    if (count >= 4)
+    if (count >= 8)
       throw createError.Conflict(
         "Number of blog in the home page is 4 So, we can't proceed further."
       );
@@ -19,6 +19,7 @@ const addDashboardFeed = async (req, res, next) => {
 
     const addDashboardFeeds = new DashboardFeed({
       feed: req.body.feed,
+      type: req.body.feedType,
       addedBy: userId,
     });
     // Save post to DB

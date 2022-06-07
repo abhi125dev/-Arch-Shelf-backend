@@ -4,10 +4,10 @@ const DashboardFeedsSchema = new Schema(
   {
     feed: {
       type: Schema.Types.ObjectId,
-      ref: "Feed",
       required: true,
       unique: true,
     },
+    type: { type: String, enum: ["feed", "project"] },
     addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   {
