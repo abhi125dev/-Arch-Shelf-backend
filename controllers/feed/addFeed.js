@@ -19,7 +19,15 @@ const createFeed = async (req, res, next) => {
 
       try {
         const result = await feedValidation.validateAsync(fields);
-        const { title, body, type, shortDescription, category, url } = result;
+        const {
+          title,
+          body,
+          type,
+          shortDescription,
+          category,
+          url,
+          authorName,
+        } = result;
 
         // upload files to s3
         const filesArray = Object.values(files);
@@ -50,6 +58,7 @@ const createFeed = async (req, res, next) => {
           type,
           shortDescription,
           category,
+          authorName,
           url,
         });
         // Save post to DB

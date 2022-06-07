@@ -64,6 +64,7 @@ const getFeeds = async (req, res, next) => {
           url: 1,
           user: 1,
           category: 1,
+          authorName: 1,
           body: 1,
           type: 1,
           created_at: 1,

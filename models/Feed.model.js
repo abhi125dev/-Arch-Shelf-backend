@@ -15,6 +15,7 @@ const feedSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     body: { type: String, required: true },
+    authorName: { type: String },
     characteristics: { type: String },
     type: {
       type: String,

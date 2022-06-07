@@ -63,6 +63,7 @@ const feedValidation = Joi.object({
   year: Joi.string(),
   url: Joi.string(),
   startDay: Joi.date(),
+  authorName: Joi.string(),
   submissionDate: Joi.date(),
   materials: Joi.string(),
   organizer: Joi.string(),
