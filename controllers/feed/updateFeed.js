@@ -45,6 +45,7 @@ const updateFeed = async (req, res, next) => {
         shortDescription: fields.shortDescription,
         category: fields.category,
         url: fields.url,
+        authorName: fields.authorName,
       };
       const existingFeed = await Feed.findOne({ _id: id });
       if (allFileUploadedArray.length > 0)

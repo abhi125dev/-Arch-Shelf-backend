@@ -58,6 +58,7 @@ const getFeed = async (req, res, next) => {
           dashboardFeed: 1,
           url: 1,
           user: 1,
+          authorName: 1,
           category: 1,
           body: 1,
           type: 1,

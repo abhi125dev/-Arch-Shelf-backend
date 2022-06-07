@@ -42,19 +42,19 @@ const createPostValidation = Joi.object({
 
 const feedValidation = Joi.object({
   title: Joi.string().required(),
-  type: Joi.string()
-    .valid(
-      "resources",
-      "projects",
-      "courses",
-      "initiatives",
-      "breakfasts"
-    ),
+  type: Joi.string().valid(
+    "resources",
+    "projects",
+    "courses",
+    "initiatives",
+    "breakfasts"
+  ),
   body: Joi.string().required(),
   shortDescription: Joi.string(),
   category: Joi.string(),
   url: Joi.string(),
   startDay: Joi.date(),
+  authorName: Joi.string(),
   submissionDate: Joi.date(),
   organizer: Joi.string(),
   price: Joi.number(),
